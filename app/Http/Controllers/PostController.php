@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Post;
-use App\Http\Resources\Posts;
 use App\Repositories\PostRepositoryInterface;
+use DateTime;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\URL;
 
 class PostController extends Controller
@@ -26,7 +29,7 @@ class PostController extends Controller
      * Display a listing of the resource.
      *
      * @param Request $request
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return AnonymousResourceCollection
      */
     public function index(Request $request)
     {
@@ -36,8 +39,8 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Post $request
+     * @return Response
      */
     public function store(Post $request)
     {
@@ -47,8 +50,8 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function show($id)
     {
@@ -58,9 +61,9 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param Post $request
+     * @param int $id
+     * @return JsonResponse
      */
     public function update(Post $request, $id)
     {
@@ -70,8 +73,8 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @param int $id
+     * @return JsonResponse
      */
     public function destroy($id)
     {
@@ -81,13 +84,13 @@ class PostController extends Controller
     /**
      * @param Request $request
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function postUploadImage(Request $request)
     {
         $file = $request->file('file');
 
-        $filename = (new \DateTime())->getTimestamp() . '.' . $file->getClientOriginalExtension();
+        $filename = (new DateTime())->getTimestamp() . '.' . $file->getClientOriginalExtension();
         $file->move('uploads', $filename);
         return URL::to("uploads/$filename");
     }

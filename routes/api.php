@@ -7,7 +7,6 @@ Route::post('/register', 'UserController@postRegister');
 Route::post('/login', 'UserController@postLogin');
 Route::post('/logout', 'UserController@postLogout');
 Route::apiResource('/posts', 'PostController')->only(['index', 'show']);
-Route::apiResource('/comments', 'CommentController')->only(['index', 'show']);
 Route::group(['middleware' => ['auth:api']], function () {
     Route::group(['middleware' => ['type:redactor']], function () {
         Route::apiResource('/posts', 'PostController')->only(['update', 'destroy', 'store']);

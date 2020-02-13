@@ -67,8 +67,8 @@ class PostRepository implements PostRepositoryInterface
     public function all($page = null)
     {
         $posts = [];
-        if(!empty($page)) {
-            $posts = Post::offset(($page -1) * 10)->limit(10)->get();
+        if (!empty($page)) {
+            $posts = Post::offset(($page - 1) * 10)->limit(10)->get();
         } else {
             $posts = Post::all();
         }

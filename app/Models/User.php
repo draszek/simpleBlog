@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use App\Http\Resources\Posts;
-use Illuminate\Database\Eloquent\Model;
-use Tymon\JWTAuth\Contracts\JWTSubject;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -32,7 +32,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function hasType($type)
     {
-        if($this->type === 'administrator') {
+        if ($this->type === 'administrator') {
             return true;
         }
 
@@ -56,7 +56,7 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function posts()
     {

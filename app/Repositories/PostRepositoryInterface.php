@@ -12,5 +12,5 @@ interface PostRepositoryInterface
 
     public function delete($id);
 
-    public function all();
+    public function all($id);
 }
