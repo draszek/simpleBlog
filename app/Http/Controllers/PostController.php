@@ -13,6 +13,10 @@ class PostController extends Controller
 {
     private $postRepository;
 
+    /**
+     * PostController constructor.
+     * @param PostRepositoryInterface $postRepository
+     */
     public function __construct(PostRepositoryInterface $postRepository)
     {
         $this->postRepository = $postRepository;
